@@ -15,7 +15,13 @@ def getroutes(request):
 
 
 @api_view(['GET'])
-def getmovie(request):
+def getmovies(request):
     movie = Movies.objects.all()
     serializer = MovieSerializer(movie, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getmovie(request, pk):
+    movie = Movies.objects.get(id = pk)
+    serializer = MovieSerializer(movie, many=False)
     return Response(serializer.data)
