@@ -7,4 +7,8 @@ urlpatterns = [
     path('book-ticket/', views.bookticket, name='bookticket'),
     path('change-ticket/<str:pk>', views.changeticket, name='changeticket'),
     path('delete-ticket/<str:pk>', views.deleteticket, name='deleteticket'),
+  
+    path('login/', views.loginuser,name='login'),
+    path('logout/', views.logoutuser,name='logout'),
+    path('register/',views.registeruser,name='register'),
 ]

@@ -1,17 +1,57 @@
+from django.contrib.auth.models import User
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate,logout
 from .forms import MovieForm
-
-
 from movie.models import Movies
 
 # Create your views here.
+
+def loginuser(request):
+
+    page = 'login'
+
+    if request.user.is_authenticated:
+        return redirect('userdata')
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            print('username doesnot exist')
+        
+        user = authenticate(request,username=username,password=password)
+
+        if user is not None:
+            login(request,user)
+            return redirect("userdata")
+        else:
+            print("user doesnot exist")
+
+
+    return render(request, 'movie/login_form.html')
+
+def logoutuser(request):
+    logout(request)
+    return redirect('login')
+
+def registeruser(request):
+    page = 'register'
+    context = {
+        'page' : page
+    }
+    return render(request,'movie/login_form.html',context)
+
 
 
 def index(request):
     return render(request, 'movie/index.html')
 
-
+@login_required(login_url='login')
 def userdata(request):
     data = Movies.objects.all()
     context = {
@@ -19,7 +59,7 @@ def userdata(request):
     }
     return render(request, 'movie/ticket_info.html', context)
 
-
+@login_required(login_url='login')
 def bookticket(request):
     form = MovieForm()
 
@@ -35,7 +75,7 @@ def bookticket(request):
     }
     return render(request, 'movie/ticket-form.html', context)
 
-
+@login_required(login_url='login')
 def changeticket(request, pk):
     change = Movies.objects.get(id=pk)
     form = MovieForm(instance=change)
@@ -51,12 +91,13 @@ def changeticket(request, pk):
     }
     return render(request, 'movie/ticket-form.html', context)
 
-def deleteticket(request,pk):
+@login_required(login_url='login')
+def deleteticket(request, pk):
     ticket = Movies.objects.get(id=pk)
     if request.method == 'POST':
         ticket.delete()
         return redirect('userdata')
     context = {
-        'object' : ticket
+        'object': ticket
     }
-    return render(request,'movie/delete_ticket.html',context)
+    return render(request, 'movie/delete_ticket.html', context)
