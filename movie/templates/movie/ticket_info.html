@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<table border='1'>
+    <tr>
+        <th>S.no</th>
+        <th>Movie Name</th>
+        <th>Booked By</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Seat No</th>
+        <th>Amount Paid</th>
+    </tr>
+{% for item in data %}
+<tr>
+    <td>{{item.id}}</td>
+    <td>{{item.title}}</td>
+    <td>{{item.username}}</td>
+    <td>{{item.date}}</td>
+    <td>{{item.time}}</td>
+    <td>{{item.seats}}</td>
+    <td>{{item.payment}}</td>
+</tr>
+{% endfor %}
+</table>
+
+
+
+</ul>
+{% endblock content %}
