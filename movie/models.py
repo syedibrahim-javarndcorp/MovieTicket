@@ -8,8 +8,8 @@ class Movies(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50,null=True,blank=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(auto_now=False, auto_now_add=False,null=True,blank=True)
-    time = models.TimeField(auto_now=False, auto_now_add=False,null=True,blank=True)
+    date = models.DateField(auto_now=False,null=True,blank=True)
+    time = models.TimeField(auto_now=False, null=True,blank=True)
     seats = models.IntegerField(null=True,blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(5)])
     payment = models.IntegerField(null=True,blank=True)

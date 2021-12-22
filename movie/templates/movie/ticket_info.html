@@ -10,6 +10,8 @@
         <th>Time</th>
         <th>Seat No</th>
         <th>Amount Paid</th>
+        <th>Change </th>
+        <th>Delete </th>
     </tr>
 {% for item in data %}
 <tr>
@@ -20,6 +22,8 @@
     <td>{{item.time}}</td>
     <td>{{item.seats}}</td>
     <td>{{item.payment}}</td>
+    <td><a href="{% url 'changeticket' item.id %}">Change ticket</a>
+        <td><a href="{% url 'deleteticket' item.id %}">Delete ticket</a>
 </tr>
 {% endfor %}
 </table>

@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <p>Do you want to cancel the Ticket of "{{object}}"?</p>
+    <input type="submit" value="Confirm">
+    <button><a href="{% url 'userdata' %}">Go Back</a></button>
+</form> 
+
+
+
+{% endblock content %}
+
