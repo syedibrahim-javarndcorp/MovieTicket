@@ -1,3 +1,4 @@
+
 from django.urls import path
 from . import views
 
@@ -7,7 +8,7 @@ urlpatterns = [
     path('book-ticket/', views.bookticket, name='bookticket'),
     path('change-ticket/<str:pk>', views.changeticket, name='changeticket'),
     path('delete-ticket/<str:pk>', views.deleteticket, name='deleteticket'),
-  
+    path('movie/<str:pk>',views.MovieList.as_view(), name='single'),
     path('login/', views.loginuser,name='login'),
     path('logout/', views.logoutuser,name='logout'),
     path('register/',views.registeruser,name='register'),

@@ -4,10 +4,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
+from django.views.generic.list import ListView
 from .forms import MovieForm
 from movie.models import Movies
 
 # Create your views here.
+
+class MovieList(ListView):
+    model = Movies
+    template_name = 'movie/single_user.html'
+    context_object_name = 'movie_by_user'
+
+    
+    def get_queryset(self):
+        return Movies.objects.filter(username=self.kwargs['pk'])
+
 
 
 def loginuser(request):
@@ -119,3 +130,4 @@ def deleteticket(request, pk):
         'object': ticket
     }
     return render(request, 'movie/delete_ticket.html', context)
+

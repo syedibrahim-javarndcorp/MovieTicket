@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %} 
+
+
+
+<br>
+<br>
+<table align ="center";>
+    <tr>
+        <th>S.no</th>
+        <th>Movie Name</th>
+        <th>Booked By</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Seat No</th>
+        <th>Amount Paid</th>
+        <th>Change </th>
+        <th>Delete </th>
+    </tr>
+    {% for m in movie_by_user %}
+<tr>
+    <td>{{m.id}}</td>
+    <td>{{m.title}}</td>
+    <td>{{m.username}}</td>
+    <td>{{m.date}}</td>
+    <td>{{m.time}}</td>
+    <td>{{m.seats}}</td>
+    <td>{{m.payment}}</td>
+    <td><a href="{% url 'changeticket' m.id %}">Change ticket</a>
+        <td><a href="{% url 'deleteticket' m.id %}">Delete ticket</a>
+</tr>
+{% endfor %}
+</table>
+
+
+
+{% endblock content %}
