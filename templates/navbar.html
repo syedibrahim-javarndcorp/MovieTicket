@@ -8,7 +8,7 @@
   <body>
     <div class="navbar">
       <ul>
-        <li>Home</li>
+        <li><a href="{% url 'userdata' %}">Home </a></li>
         <li>About Us</li>
         <li><a href="{% url 'bookticket' %}">Book </a></li>
         {% if request.user.is_authenticated %}
