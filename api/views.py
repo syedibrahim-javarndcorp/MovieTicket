@@ -1,8 +1,12 @@
+from django.http import response
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .serializer import MovieSerializer
 from movie.models import Movies
+
+from api import serializer
 
 
 
@@ -42,3 +46,12 @@ def getsinglemovie(request, pk):
     serializer = MovieSerializer(movie, many=False)
     
     return Response(serializer.data)
+
+
+@api_view(["DELETE"])
+def deletemovie(request,pk):
+    movie = Movies.objects.get(id = pk)
+    movie.delete()
+    
+    return Response(status=status.HTTP_204_NO_CONTENT)
+    
