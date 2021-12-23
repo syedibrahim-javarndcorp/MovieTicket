@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from .serializer import MovieSerializer
 from movie.models import Movies
 
-from api import serializer
 
 
 @api_view(['GET'])
